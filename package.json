@@ -1,0 +1,37 @@
+{
+  "name": "agol-swagger",
+  "version": "0.1.0",
+  "description": "Swagger spec for ArcGIS Online's REST API",
+  "main": "index.js",
+  "dependencies": { },
+  "devDependencies": {
+    "agol-schemas": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "updateDefs": "node build/update-swagger-definitions.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmrEldib/agol-swagger.git"
+  },
+  "keywords": [
+    "agol",
+    "esri",
+    "arcgis",
+    "online",
+    "swagger"
+  ],
+  "author": "Amr Eldib",
+  "contributors": [
+    {
+      "name": "Amr Eldib",
+      "url": "http://amreldib.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmrEldib/agol-swagger/issues"
+  },
+  "homepage": "https://github.com/AmrEldib/agol-swagger#readme"
+}
