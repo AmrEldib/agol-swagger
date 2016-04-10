@@ -133,7 +133,7 @@
         },
         "description": "The Root resource only returns the version of the containing portal. It acts as a root to its child resources and operations. To obtain descriptive information about this portal including its name, logo, featured items, and supported protocols (HTTP vs HTTPS), access the Self resource under Portals.",
         "operationId": "getOrgRoot",
-        "security": [ ],
+        "security": [],
         "parameters": [
           {
             "$ref": "#/parameters/f"
@@ -1112,7 +1112,7 @@
         },
         "description": "Lists the available regions",
         "operationId": "getPortalRegions",
-        "security": [ ],
+        "security": [],
         "parameters": [
           {
             "$ref": "#/parameters/f"
@@ -1138,7 +1138,7 @@
         },
         "description": "Lists the available languages",
         "operationId": "getPortalLanguages",
-        "security": [ ],
+        "security": [],
         "parameters": [
           {
             "$ref": "#/parameters/f"
@@ -1398,7 +1398,11 @@
         "group": {
           "type": "object",
           "description": "The JSON group object representing the created group. See the Group response properties for the properties returned",
-          "$ref": "#/definitions/getGroup"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/getGroup"
+            }
+          ]
         }
       },
       "required": [
@@ -1408,7 +1412,7 @@
     },
     "createService": {
       "type": "object",
-      "description": "The Create Service operation (POST only) allows users to create a hosted feature service. You can use the API to create an empty hosted feature service from feature service metadata JSON. http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/",
+      "description": "The Create Service operation (POST only) allows users to create a hosted feature service. You can use the API to create an empty hosted feaure service from feature service metadata JSON. http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/",
       "title": "createService",
       "properties": {
         "encodedServiceURL": {
@@ -1705,7 +1709,7 @@
         },
         "ssl": {
           "type": "boolean",
-          "description": "True if the token must always pass over ssl"
+          "description": "True if the tokem must always pass over ssl"
         }
       },
       "required": [
@@ -1756,7 +1760,12 @@
       "minLength": 2,
       "maxLength": 2,
       "items": {
-        "$ref": "#/definitions/getCoordinate"
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/definitions/getCoordinate"
+          }
+        ]
       }
     },
     "getFolder": {
@@ -2902,7 +2911,7 @@
               "properties": {
                 "url": {
                   "type": "string",
-                  "description": "URL for hydrology service"
+                  "description": "URL for hydrologoy service"
                 }
               },
               "required": [
@@ -3136,7 +3145,7 @@
         },
         "portalMode": {
           "type": "string",
-          "description": "Identifies if multitenant or single-tenant",
+          "description": "Identifies if multitenant or singletenant",
           "enum": [
             "multitenant",
             "singletenant"
