@@ -128,6 +128,13 @@
       "description": "Name of the user applying to join the group",
       "required": true,
       "type": "string"
+    },
+    "invitationId": {
+      "name": "invitationId",
+      "in": "path",
+      "description": "The ID of the invitation",
+      "required": true,
+      "type": "string"
     }
   },
   "paths": {
@@ -192,7 +199,48 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/getGroup"
+              "$ref": "#/definitions/acceptGroupApplication"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/users/{userName}/invitations/{invitationId}/accept": {
+      "x-swagger-router-controller": "acceptInvitation",
+      "get": {
+        "summary": "Accept Invitation",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Accept Invitation",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Accept_Invitation/02r3000000m4000000/"
+        },
+        "description": "When a group owner or an administrator invites a user to their group, it results in a user invitation. The invited user accepts the invitation using the Accept Invitation operation (POST only). This operation adds the invited user to the group, and the invitation is deleted. This operation also creates a notification for the user indicating that the user's invitation was accepted. Available only to authenticated users",
+        "operationId": "acceptInvitation",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "posts:acceptInvitation"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/invitationId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/acceptInvitation"
             }
           }
         }
