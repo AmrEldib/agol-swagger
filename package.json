@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "description": "Swagger spec for ArcGIS Online's REST API",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": { },
   "devDependencies": {
     "agol-schemas": "^1.0.1",
     "mocha": "^2.4.5",
+    "rsvp": "^3.2.1",
     "tv4": "^1.2.7"
   },
   "scripts": {
     "test": "mocha",
+    "buildCoverage": "node build/build-coverage.js",
     "updateDefs": "node build/update-swagger-definitions.js"
   },
   "repository": {

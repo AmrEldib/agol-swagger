@@ -1,3 +1,4 @@
 test/
+build/
 agol-swagger.jsproj
 agol-swagger.sln

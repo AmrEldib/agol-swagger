@@ -47,7 +47,8 @@
         "read:getUserContent": "reads getUserContent",
         "read:getUserInvitations": "reads getUserInvitations",
         "read:getUserTags": "reads getUserTags",
-        "post:updateUser": "posts updateUser"
+        "post:updateUser": "posts updateUser",
+        "post:acceptGroupApplication": "posts acceptGroupApplication"
       }
     }
   },
@@ -120,6 +121,13 @@
       "description": "Name of the user",
       "required": true,
       "type": "string"
+    },
+    "applicationUsername": {
+      "name": "applicationUsername",
+      "in": "path",
+      "description": "Name of the user applying to join the group",
+      "required": true,
+      "type": "string"
     }
   },
   "paths": {
@@ -133,7 +141,7 @@
         },
         "description": "The Root resource only returns the version of the containing portal. It acts as a root to its child resources and operations. To obtain descriptive information about this portal including its name, logo, featured items, and supported protocols (HTTP vs HTTPS), access the Self resource under Portals.",
         "operationId": "getOrgRoot",
-        "security": [],
+        "security": [ ],
         "parameters": [
           {
             "$ref": "#/parameters/f"
@@ -144,6 +152,47 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/getOrgRoot"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/applications/{applicationUsername}/accept": {
+      "x-swagger-router-controller": "acceptGroupApplication",
+      "get": {
+        "summary": "Accept Group Application",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Accept Group Application",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Accept_Group_Application/02r300000069000000/"
+        },
+        "description": "When a user applies to join a group, a group application is created. Group administrators choose to accept this application using the Accept Group Application operation (POST only). This operation adds the applying user to the group then deletes the application. This operation also creates a notification for the user indicating that the user's group application was accepted. Available only to group owners and admins",
+        "operationId": "acceptGroupApplication",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:acceptGroupApplication"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "$ref": "#/parameters/applicationUsername"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/getGroup"
             }
           }
         }
@@ -1112,7 +1161,7 @@
         },
         "description": "Lists the available regions",
         "operationId": "getPortalRegions",
-        "security": [],
+        "security": [ ],
         "parameters": [
           {
             "$ref": "#/parameters/f"
@@ -1138,7 +1187,7 @@
         },
         "description": "Lists the available languages",
         "operationId": "getPortalLanguages",
-        "security": [],
+        "security": [ ],
         "parameters": [
           {
             "$ref": "#/parameters/f"
@@ -1398,11 +1447,7 @@
         "group": {
           "type": "object",
           "description": "The JSON group object representing the created group. See the Group response properties for the properties returned",
-          "oneOf": [
-            {
-              "$ref": "#/definitions/getGroup"
-            }
-          ]
+          "$ref": "#/definitions/getGroup"
         }
       },
       "required": [
@@ -1761,11 +1806,7 @@
       "maxLength": 2,
       "items": {
         "type": "object",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/getCoordinate"
-          }
-        ]
+        "$ref": "#/definitions/getCoordinate"
       }
     },
     "getFolder": {
