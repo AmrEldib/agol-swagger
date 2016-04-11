@@ -1,7 +1,7 @@
 ### agol-swagger Coverage of ArcGIS REST API 
-Completed items: 25  
+Completed items: 34  
 Total items: 488  
-Completed: 5 %  
+Completed: 7 %  
 
 
 **Managing your organization**  
@@ -9,10 +9,10 @@ Completed: 5 %
 ✔ [Root](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Root/02r30000009t000000/)  
 ✖ [Search](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Search/02r3000000mp000000/)  
 **Community**  
-✖ [Accept Group Application](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Accept_Group_Application/02r300000069000000/)  
-✖ [Accept Invitation](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Accept_Invitation/02r3000000m4000000/)  
-✖ [Add Users to Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Users_to_Group/02r3000002mr000000/)  
-✖ [Create Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Group/02r30000009w000000/)  
+✔ [Accept Group Application](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Accept_Group_Application/02r300000069000000/)  
+✔ [Accept Invitation](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Accept_Invitation/02r3000000m4000000/)  
+✔ [Add Users to Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Users_to_Group/02r3000002mr000000/)  
+✔ [Create Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Group/02r30000009w000000/)  
 ✖ [Decline Group Application](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Decline_Group_Application/02r30000006q000000/)  
 ✖ [Decline Invitation](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Decline_Invitation/02r3000000m8000000/)  
 ✖ [Delete Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Group/02r300000070000000/)  
@@ -41,15 +41,15 @@ Completed: 5 %
 ✖ [User Search](http://resources.arcgis.com/en/help/arcgis-rest-api/#/User_Search/02r3000000m6000000/)  
 ✔ [User Tags](http://resources.arcgis.com/en/help/arcgis-rest-api/#/User_Tags/02r3000000m9000000/)  
 **Content**  
-✖ [Add Comment](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Comment/02r300000090000000/)  
-✖ [Add Item](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item/02r30000008q000000/)  
-✖ [Add Item Part](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item_Part/02r300000094000000/)  
-✖ [Add Rating](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Rating/02r30000007v000000/)  
+✔ [Add Comment](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Comment/02r300000090000000/)  
+✔ [Add Item](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item/02r30000008q000000/)  
+✔ [Add Item Part](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item_Part/02r300000094000000/)  
+✔ [Add Rating](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Rating/02r30000007v000000/)  
 ✖ [Add Relationship](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Relationship/02r30000009n000000/)  
 ✖ [Analyze](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Analyze/02r30000007r000000/)  
 ✖ [Cancel](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Cancel/02r30000007q000000/)  
 ✖ [Commit](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Commit/02r30000008t000000/)  
-✖ [Create Folder](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Folder/02r300000074000000/)  
+✔ [Create Folder](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Folder/02r300000074000000/)  
 ✖ [Create Proxies](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Proxies/02r3000002qw000000/)  
 ✖ [Create Service](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/)  
 ✖ [Create Service (Image Service)](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service_Image_Service/02r3000002nr000000/)  
