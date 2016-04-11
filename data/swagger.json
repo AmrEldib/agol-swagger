@@ -52,7 +52,8 @@
         "post:acceptInvitation": "posts acceptInvitation",
         "post:addComment": "posts addComment",
         "post:addItem": "posts addItem",
-        "post:addItemPart": "posts addItemPart"
+        "post:addItemPart": "posts addItemPart",
+        "post:addRating": "posts addRating"
       }
     }
   },
@@ -485,6 +486,53 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/addItemPart"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/content/items/{itemId}/addRating": {
+      "x-swagger-router-controller": "addRating",
+      "post": {
+        "summary": "Add Rating",
+        "externalDocs": {
+          "description": "Managing your organization > Content > Add Rating",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Rating/02r30000007v000000/"
+        },
+        "description": "Adds a rating to an item to which you have access (POST only). Only one rating can be given to an item per user. If this call is made on a currently rated item, the new rating will overwrite the existing rating. A user cannot rate their own item. Available only to authenticated users",
+        "operationId": "addRating",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:addRating"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/itemId"
+          },
+          {
+            "name": "rating",
+            "in": "body",
+            "description": "Rating to set for the item. Rating must be a floating point number between 1.0 and 5.0.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/addRating"
             }
           }
         }
