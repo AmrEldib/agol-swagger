@@ -50,7 +50,8 @@
         "post:updateUser": "posts updateUser",
         "post:acceptGroupApplication": "posts acceptGroupApplication",
         "post:acceptInvitation": "posts acceptInvitation",
-        "post:addComment": "posts addComment"
+        "post:addComment": "posts addComment",
+        "post:addItem": "posts addItem"
       }
     }
   },
@@ -261,7 +262,7 @@
         "security": [
           {
             "agol_oauth_implicit": [
-              "posts:addComment"
+              "post:addComment"
             ]
           }
         ],
@@ -290,6 +291,143 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/addComment"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/content/items/{userName}/addItem": {
+      "x-swagger-router-controller": "addItem",
+      "post": {
+        "summary": "Add Item",
+        "externalDocs": {
+          "description": "Managing your organization > Content > Add Item",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item/02r30000008q000000/"
+        },
+        "description": "The Add Item operation (POST only) is used to upload an item file, submit text content, or submit the item URL to the specified user folder depending on documented items and item types. This operation is available only to the specified user. The request to upload an item file must be a multipart request pursuant to IETF RFC1867. The request to submit text content or a URL can be a standard HTTP POST request. The user owning the folder automatically becomes the owner of the item. The item is flagged as private (that is, not shared with any group) by default. This can be changed using the Share Item operation. The added item is available to everyone it's shared with at the item resource. The item is also available to the owner at the user item resource, which supports operations to update, delete, move, share, and unshare items. The addItem operation allows users to optionally create a relationship and share an item in one call. See Add Relationship for parameter information. The same rules apply, with the following exceptions: \nIf you specify an originItemId, the new item is added as the destination item. \nIf you specify a destinationitemId, the new item is added as the origin item. \nIf you specify both, an error is thrown. \nThe relationship creation is done after the item is created. \nIf the item doesn’t add correctly, no relationship is created. \nIf the item adds correctly, but the relationship fails (that is, bad relationship type, invalid origin or destination item, and so on), the item is deleted. \nThe destination item will inherit all the sharing permissions of the origin item. \nThe filename or URL used for an item must be unique within the particular user's folder.",
+        "operationId": "addItem",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:addItem"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "description": "The file to be uploaded. If uploading a file, the request must be a multipart request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataUrl",
+            "in": "body",
+            "description": "The URL where the item can be downloaded. The resource will be downloaded and stored as a file type. Similar to uploading a file to be added, but instead of transferring the contents of the file, the URL of the data file is referenced and creates a file item. Please see the implementation details section (in the documentation article) which discusses this parameter in further details",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url",
+            "in": "body",
+            "description": "The URL of the item to be submitted. The URL can be a URL to a service, a web mapping application, or any other content available at that URL. Example: url=http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "body",
+            "description": "The text content for the item to be submitted. Example: text=Any+plain+text+content",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "relationshipType",
+            "in": "body",
+            "description": "The type of relationship between the two items. See Relationship types for a complete listing of types. Example: WMA2Code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "originItemId",
+            "in": "body",
+            "description": "The item ID of the origin item of the relationship. Example: bb297e5eac6d489e85993d5e4d4e4a20",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destinationItemId",
+            "in": "body",
+            "description": "The item ID of the destination item of the relationship. Example: 8d292f9b0cd5457bbdad84c02223ffb8",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "async",
+            "in": "body",
+            "description": "If true, the file is uploaded asynchronously. If false, the file is uploaded synchronously. Default is false. Example: async=true",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "multipart",
+            "in": "body",
+            "description": "If true, the file is uploaded in multiple parts. See the Multipart Uploads section above for more information",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "filename",
+            "in": "body",
+            "description": "The filename being uploaded in multipart mode. Required if multipart=true",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serviceProxyParams",
+            "in": "body",
+            "description": "A JSON object that provides rate limiting and referrer checks when accessing secured services. Example: serviceProxyParams: \"hitsPerInterval\":2,\"intervalSeconds\":60,\"referrers\":[\"http://<servername>\"]}",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/addItem"
             }
           }
         }
