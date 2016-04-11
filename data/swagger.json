@@ -48,7 +48,9 @@
         "read:getUserInvitations": "reads getUserInvitations",
         "read:getUserTags": "reads getUserTags",
         "post:updateUser": "posts updateUser",
-        "post:acceptGroupApplication": "posts acceptGroupApplication"
+        "post:acceptGroupApplication": "posts acceptGroupApplication",
+        "post:acceptInvitation": "posts acceptInvitation",
+        "post:addComment": "posts addComment"
       }
     }
   },
@@ -166,7 +168,7 @@
     },
     "/sharing/rest/community/groups/{groupId}/applications/{applicationUsername}/accept": {
       "x-swagger-router-controller": "acceptGroupApplication",
-      "get": {
+      "post": {
         "summary": "Accept Group Application",
         "externalDocs": {
           "description": "Managing your organization > Community > Accept Group Application",
@@ -207,7 +209,7 @@
     },
     "/sharing/rest/community/users/{userName}/invitations/{invitationId}/accept": {
       "x-swagger-router-controller": "acceptInvitation",
-      "get": {
+      "post": {
         "summary": "Accept Invitation",
         "externalDocs": {
           "description": "Managing your organization > Community > Accept Invitation",
@@ -218,7 +220,7 @@
         "security": [
           {
             "agol_oauth_implicit": [
-              "posts:acceptInvitation"
+              "post:acceptInvitation"
             ]
           }
         ],
@@ -241,6 +243,53 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/acceptInvitation"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/content/items/{itemId}/addComment": {
+      "x-swagger-router-controller": "addComment",
+      "post": {
+        "summary": "Add Comment",
+        "externalDocs": {
+          "description": "Managing your organization > Content > Add Comment",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Comment/02r300000090000000/"
+        },
+        "description": "Adds a comment to an item (POST only). Available only to authenticated users who have access to the item",
+        "operationId": "addComment",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "posts:addComment"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/itemId"
+          },
+          {
+            "name": "comment",
+            "in": "body",
+            "description": "Text of the comment to be added",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/addComment"
             }
           }
         }
