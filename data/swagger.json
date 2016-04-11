@@ -56,7 +56,8 @@
         "post:addRating": "posts addRating",
         "post:addRelationship": "posts addRelationship",
         "post:addUsersToGroup": "posts addUsersToGroup",
-        "post:createFolder": "posts createFolder"
+        "post:createFolder": "posts createFolder",
+        "post:createGroup": "posts createGroup"
       }
     }
   },
@@ -326,7 +327,7 @@
             "name": "file",
             "in": "body",
             "description": "The file to be uploaded. If uploading a file, the request must be a multipart request",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -335,7 +336,7 @@
             "name": "dataUrl",
             "in": "body",
             "description": "The URL where the item can be downloaded. The resource will be downloaded and stored as a file type. Similar to uploading a file to be added, but instead of transferring the contents of the file, the URL of the data file is referenced and creates a file item. Please see the implementation details section (in the documentation article) which discusses this parameter in further details",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -344,7 +345,7 @@
             "name": "url",
             "in": "body",
             "description": "The URL of the item to be submitted. The URL can be a URL to a service, a web mapping application, or any other content available at that URL. Example: url=http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -353,7 +354,7 @@
             "name": "text",
             "in": "body",
             "description": "The text content for the item to be submitted. Example: text=Any+plain+text+content",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -362,7 +363,7 @@
             "name": "relationshipType",
             "in": "body",
             "description": "The type of relationship between the two items. See Relationship types for a complete listing of types. Example: WMA2Code",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -371,7 +372,7 @@
             "name": "originItemId",
             "in": "body",
             "description": "The item ID of the origin item of the relationship. Example: bb297e5eac6d489e85993d5e4d4e4a20",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -380,7 +381,7 @@
             "name": "destinationItemId",
             "in": "body",
             "description": "The item ID of the destination item of the relationship. Example: 8d292f9b0cd5457bbdad84c02223ffb8",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -389,16 +390,17 @@
             "name": "async",
             "in": "body",
             "description": "If true, the file is uploaded asynchronously. If false, the file is uploaded synchronously. Default is false. Example: async=true",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": false
             }
           },
           {
             "name": "multipart",
             "in": "body",
             "description": "If true, the file is uploaded in multiple parts. See the Multipart Uploads section above for more information",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "boolean"
             }
@@ -407,7 +409,7 @@
             "name": "filename",
             "in": "body",
             "description": "The filename being uploaded in multipart mode. Required if multipart=true",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -416,9 +418,20 @@
             "name": "serviceProxyParams",
             "in": "body",
             "description": "A JSON object that provides rate limiting and referrer checks when accessing secured services. Example: serviceProxyParams: \"hitsPerInterval\":2,\"intervalSeconds\":60,\"referrers\":[\"http://<servername>\"]}",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "boolean"
+              "type": "object",
+              "properties": {
+                "hitsPerInterval": {
+                  "type": "number"
+                },
+                "intervalSeconds": {
+                  "type": "number"
+                },
+                "referrers": {
+                  "type": "string"
+                }
+              }
             }
           },
           {
@@ -521,7 +534,9 @@
             "description": "Rating to set for the item. Rating must be a floating point number between 1.0 and 5.0.",
             "required": true,
             "schema": {
-              "type": "number"
+              "type": "number",
+              "minimum": 1,
+              "maximum": 5
             }
           },
           {
@@ -591,7 +606,7 @@
     "/sharing/rest/content/users/{userName}/createFolder": {
       "x-swagger-router-controller": "createFolder",
       "post": {
-        "summary": "Add Rating",
+        "summary": "Create Folder",
         "externalDocs": {
           "description": "Managing your organization > Content > Create Folder",
           "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Folder/02r300000074000000/"
@@ -614,6 +629,147 @@
             "in": "body",
             "description": "The folder title. Two folders that belong to the same user cannot have the same title.",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/createFolder"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/createGroup": {
+      "x-swagger-router-controller": "createGroup",
+      "post": {
+        "summary": "Create Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Create Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Group/02r30000009w000000/"
+        },
+        "description": "The Create Group operation (POST only) creates a new group in the Portal community. Only authenticated users can create groups. The user who creates the group automatically becomes the owner of the group. The owner of the group is automatically an administrator of the group. The calling user provides the title for the group, while the group ID is generated by the system.",
+        "operationId": "createGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:createGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "body",
+            "description": "The group title must be unique for the username, and the character limit is 250. Example: title=Redlands Fire Department",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 250
+            }
+          },
+          {
+            "name": "description",
+            "in": "body",
+            "description": "A description of the group that can be any length",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "snippet",
+            "in": "body",
+            "description": "Snippet or summary of the group that has a character limit of 250 characters",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 250
+            }
+          },
+          {
+            "name": "tags",
+            "in": "body",
+            "description": "Tags are words or short phrases that describe the group. Separate terms with commas. Example: tags=fire, Redlands, California, public safety",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone",
+            "in": "body",
+            "description": "Phone is the group contact information. It can be a combination of letters and numbers. The character limit is 250. Example: phone=http://www.ci.redlands.ca.us/fire/index.htm, 35 Cajon Street, Redlands, CA 92373 ",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "access",
+            "in": "body",
+            "description": "Sets the access level for the group. private is the default. Setting to org restricts group access to members of your organization. If public, all users can access the group. Values: private | org |public. Example: access=org",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [ "private", "org", "public" ]
+            }
+          },
+          {
+            "name": "sortField",
+            "in": "body",
+            "description": "Sets sort field for group items. Values: title | owner | avgrating |numviews| created | modified. Example: sortField=avgrating",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [ "title", "owner", "avgrating", "numviews", "created", "modified" ]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "body",
+            "description": "Sets sort order for group items. Values: asc | desc. Example: sortOrder=desc",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [ "asc", "desc" ]
+            }
+          },
+          {
+            "name": "isViewOnly",
+            "in": "body",
+            "description": "Allows the group owner or admin to create view-only groups where members are not able to share items. If members try to share, view-only groups are returned in the notshared response property. false is the default. Values: false | true. Example: isViewOnly=true",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "isInvitationOnly",
+            "in": "body",
+            "description": "If true, this group will not accept join requests. If false, this group does not require an invitation to join. Only group owners and admins can invite users to the group. false is the default. Values: true | false. Example: isInvitationOnly=true",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "thumbnail",
+            "in": "body",
+            "description": "Enter the pathname to the thumbnail image to be used for the group. The recommended image size is 200 pixels wide by 133 pixels high. Acceptable image formats are PNG, GIF, and JPEG. The maximum file size for an image is 1 MB. This is not a reference to the file but the file itself, which will be stored in the Portal. Example: thumbnail=subfolder/thumbnail.jpg",
+            "required": false,
             "schema": {
               "type": "string"
             }
