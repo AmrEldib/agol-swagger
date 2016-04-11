@@ -53,7 +53,9 @@
         "post:addComment": "posts addComment",
         "post:addItem": "posts addItem",
         "post:addItemPart": "posts addItemPart",
-        "post:addRating": "posts addRating"
+        "post:addRating": "posts addRating",
+        "post:addRelationship": "posts addRelationship",
+        "post:addUsersToGroup": "posts addUsersToGroup"
       }
     }
   },
@@ -533,6 +535,53 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/addRating"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/addUsers": {
+      "x-swagger-router-controller": "addUsersToGroup",
+      "post": {
+        "summary": "Add Users to Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Add Users to Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Users_to_Group/02r3000002mr000000/"
+        },
+        "description": "The operation to Add Users to Group (POST only) is available only to the group administrators, including the owner, and to the administrator of the organization if the user is a member. Both users and admins can be added using this operation. This is useful if you wish to add users directly within an organization without requiring them to accept an invitation. For example, a member of an organization can add only other organization members but not public users",
+        "operationId": "addUsersToGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:addUsersToGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "name": "users",
+            "in": "body",
+            "description": "A comma-separated list of usernames (both admins and regular users) to be added to the group. Example: users=regularusername1,adminusername1,adminusername2,regularusername2",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/addUsersToGroup"
             }
           }
         }
