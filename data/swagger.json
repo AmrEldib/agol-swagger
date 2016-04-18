@@ -62,7 +62,8 @@
         "post:declineGroupApplication": "posts declineGroupApplication",
         "post:declineInvitation": "posts declineInvitation",
         "post:deleteComment": "posts deleteComment",
-        "post:deleteFolder": "posts deleteFolder"
+        "post:deleteFolder": "posts deleteFolder",
+        "post:deleteGroup": "posts deleteGroup"
       }
     }
   },
@@ -968,6 +969,44 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/deleteFolder"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/delete": {
+      "x-swagger-router-controller": "deleteGroup",
+      "post": {
+        "summary": "Delete Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Delete Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Group/02r300000070000000/"
+        },
+        "description": "The Delete Group operation (POST only) is available only to the group administrators or to the administrator of the organization to which the owner belongs",
+        "operationId": "deleteGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:deleteGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/deleteGroup"
             }
           }
         }
