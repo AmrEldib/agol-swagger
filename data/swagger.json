@@ -61,7 +61,8 @@
         "post:createService": "posts createService",
         "post:declineGroupApplication": "posts declineGroupApplication",
         "post:declineInvitation": "posts declineInvitation",
-        "post:deleteComment": "posts deleteComment"
+        "post:deleteComment": "posts deleteComment",
+        "post:deleteFolder": "posts deleteFolder"
       }
     }
   },
@@ -153,6 +154,13 @@
       "name": "commentId",
       "in": "path",
       "description": "Id of the comment",
+      "required": true,
+      "type": "string"
+    },
+    "folderId": {
+      "name": "folderId",
+      "in": "path",
+      "description": "Id of the folder",
       "required": true,
       "type": "string"
     }
@@ -919,6 +927,47 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/deleteComment"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/content/users/{userName}/{folderId}/delete": {
+      "x-swagger-router-controller": "deleteFolder",
+      "post": {
+        "summary": "Delete Folder",
+        "externalDocs": {
+          "description": "Managing your organization > Content > Delete Folder",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Folder/02r30000008m000000/"
+        },
+        "description": "The delete user folder operation (POST only) is available only on the user's non-root folders. The user's root folder cannot be deleted. Deleting a folder also deletes all items that it contains (both the items and the links are removed)",
+        "operationId": "deleteFolder",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:deleteFolder"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/folderId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/deleteFolder"
             }
           }
         }

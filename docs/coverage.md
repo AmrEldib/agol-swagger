@@ -1,5 +1,5 @@
 ### agol-swagger Coverage of ArcGIS REST API 
-Completed items: 38  
+Completed items: 39  
 Total items: 488  
 Completed: 8 %  
 
@@ -54,7 +54,7 @@ Completed: 8 %
 ✔ [Create Service](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/)  
 ✖ [Create Service (Image Service)](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service_Image_Service/02r3000002nr000000/)  
 ✔ [Delete Comment](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Comment/02r300000072000000/)  
-✖ [Delete Folder](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Folder/02r30000008m000000/)  
+✔ [Delete Folder](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Folder/02r30000008m000000/)  
 ✖ [Delete Info](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Info/02r3000002nm000000/)  
 ✖ [Delete Item](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Item/02r300000092000000/)  
 ✖ [Delete Items](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Items/02r30000008r000000/)  
