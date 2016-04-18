@@ -60,7 +60,8 @@
         "post:createGroup": "posts createGroup",
         "post:createService": "posts createService",
         "post:declineGroupApplication": "posts declineGroupApplication",
-        "post:declineInvitation": "posts declineInvitation"
+        "post:declineInvitation": "posts declineInvitation",
+        "post:deleteComment": "posts deleteComment"
       }
     }
   },
@@ -145,6 +146,13 @@
       "name": "invitationId",
       "in": "path",
       "description": "The ID of the invitation",
+      "required": true,
+      "type": "string"
+    },
+    "commentId": {
+      "name": "commentId",
+      "in": "path",
+      "description": "Id of the comment",
       "required": true,
       "type": "string"
     }
@@ -870,6 +878,47 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/declineInvitation"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/content/items/{itemId}/comments/{commentId}/delete": {
+      "x-swagger-router-controller": "deleteComment",
+      "post": {
+        "summary": "Delete Comment",
+        "externalDocs": {
+          "description": "Managing your organization > Content > Delete Comment",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Comment/02r300000072000000/"
+        },
+        "description": "Deletes the particular comment (POST only). This functionality is available to authenticated users who originally created the comment and item owners on items that they own",
+        "operationId": "deleteComment",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:deleteComment"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/itemId"
+          },
+          {
+            "$ref": "#/parameters/commentId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/deleteComment"
             }
           }
         }
@@ -1618,11 +1667,7 @@
             "$ref": "#/parameters/itemId"
           },
           {
-            "name": "commentId",
-            "in": "path",
-            "description": "Id of the comment",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/commentId"
           },
           {
             "$ref": "#/parameters/f"
