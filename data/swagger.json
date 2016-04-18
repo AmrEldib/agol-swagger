@@ -59,7 +59,8 @@
         "post:createFolder": "posts createFolder",
         "post:createGroup": "posts createGroup",
         "post:createService": "posts createService",
-        "post:declineGroupApplication": "posts declineGroupApplication"
+        "post:declineGroupApplication": "posts declineGroupApplication",
+        "post:declineInvitation": "posts declineInvitation"
       }
     }
   },
@@ -833,6 +834,47 @@
         }
       }
     },
+    "/sharing/rest/community/users/{userName}/invitations/{invitationId}/decline": {
+      "x-swagger-router-controller": "declineInvitation",
+      "post": {
+        "summary": "Decline Invitation",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Decline Invitation",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Decline_Invitation/02r3000000m8000000/"
+        },
+        "description": "When a group administrator invites a user to their group, it results in a group invitation. The invited user can decline the invitation using the Decline Invitation operation (POST only). The operation deletes the invitation and creates a notification for the user indicating that they declined the invitation. The invited user is not added to the group. Available only to authenticated users",
+        "operationId": "declineInvitation",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:declineInvitation"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/invitationId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/declineInvitation"
+            }
+          }
+        }
+      }
+    },
     "/sharing/rest/community/createGroup": {
       "x-swagger-router-controller": "createGroup",
       "post": {
@@ -1345,11 +1387,7 @@
             "$ref": "#/parameters/userName"
           },
           {
-            "name": "invitationId",
-            "in": "path",
-            "description": "Id of the user invitation",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/invitationId"
           },
           {
             "$ref": "#/parameters/f"
