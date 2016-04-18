@@ -57,7 +57,8 @@
         "post:addRelationship": "posts addRelationship",
         "post:addUsersToGroup": "posts addUsersToGroup",
         "post:createFolder": "posts createFolder",
-        "post:createGroup": "posts createGroup"
+        "post:createGroup": "posts createGroup",
+        "post:createService": "posts createService"
       }
     }
   },
@@ -645,6 +646,146 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/createFolder"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/content/users/{userName}/createService": {
+      "x-swagger-router-controller": "createService",
+      "post": {
+        "summary": "Create Service",
+        "externalDocs": {
+          "description": "Managing your organization > Content > Create Service",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/"
+        },
+        "description": "The Create Service operation (POST only) allows users to create a hosted feature service. You can use the API to create an empty hosted feaure service from feature service metadata JSON",
+        "operationId": "createService",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:createService"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "name": "createParameters",
+            "in": "body",
+            "description": "A JSON object specifying the properties of the newly-created service",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the service to be created. This name must be unique. If the name already exists, the operation will fail"
+                },
+                "serviceDescription": {
+                  "type": "string",
+                  "description": "Description given to the service"
+                },
+                "hasStaticData": {
+                  "type": "boolean",
+                  "description": "Boolean value indicating whether the data changes"
+                },
+                "maxRecordCount": {
+                  "type": "number",
+                  "description": "A double value indicating any constraints enforced on query operations"
+                },
+                "supportedQueryFormats": {
+                  "type": "string",
+                  "description": "The formats in which query results are returned"
+                },
+                "capabilities": {
+                  "type": "string",
+                  "description": "Specify feature service editing capabilities for Create, Delete, Query, Update, and Sync. The value is a comma-delimited (no spaces) string of some of these values: Create, Delete, Query, Update, Sync"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A user-friendly description for the published dataset"
+                },
+                "copyrightText": {
+                  "type": "string",
+                  "description": "Copyright information associated with the dataset"
+                },
+                "spatialReference": {
+                  "type": "object",
+                  "properties": {
+                    "wkid": {
+                      "type": "number"
+                    }
+                  },
+                  "description": "All layers added to a hosted feature service need to have the same spatial reference defined for the feature service. When creating a new empty service without specifying its spatial reference, the spatial reference of the hosted feature service is set to the first layer added to that feature service"
+                },
+                "initialExtent": {
+                  "description": "The initial extent set for the service",
+                  "$ref": "#/definitions/getExtent"
+                },
+                "allowGeometryUpdates": {
+                  "type": "boolean",
+                  "description": "Boolean value indicating if updating the geometry of the service is permitted"
+                },
+                "units": {
+                  "type": "string",
+                  "description": "Units used by the feature service"
+                },
+                "xssPreventionInfo": {
+                  "type": "object",
+                  "description": "A JSON object specifying the properties of cross-site scripting prevention",
+                  "properties": {
+                    "xssPreventionEnabled": {
+                      "type": "boolean",
+                      "description": "Boolean value indicating whether cross-site scripting prevention is enabled"
+                    },
+                    "xssPreventionRule": {
+                      "type": "string",
+                      "enum": [
+                        "InputOnly",
+                        "InputOutput"
+                      ]
+                    },
+                    "xssInputRule": {
+                      "type": "string",
+                      "enum": [
+                        "rejectInvalid",
+                        "sanitizeInvalid"
+                      ]
+                    }
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          {
+            "name": "outputType",
+            "in": "body",
+            "description": "The newly-created service type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "featureService",
+              "enum": [ "featureService" ]
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/createService"
             }
           }
         }
