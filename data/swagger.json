@@ -64,7 +64,8 @@
         "post:deleteComment": "posts deleteComment",
         "post:deleteFolder": "posts deleteFolder",
         "post:deleteGroup": "posts deleteGroup",
-        "post:deleteNotification": "posts deleteNotification"
+        "post:deleteNotification": "posts deleteNotification",
+        "post:deleteUser":"posts deleteUser"
       }
     }
   },
@@ -1056,6 +1057,44 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/deleteNotification"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/users/{userName}/delete": {
+      "x-swagger-router-controller": "deleteUser",
+      "post": {
+        "summary": "Delete User",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Delete User",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_User/02r3000000mw000000/"
+        },
+        "description": "The Delete User operation (POST only) is available only to the user in question or to the administrator of the user's organization. If deleting a user who is part of an organization, their content and groups must be transferred to another member or deleted prior to deleting the user. If the user is not part of an organization, all content and groups of the user must first be deleted. Deleting a user whose identity provider is the Esri Global Account will not delete the user from the Esri Global Account system.",
+        "operationId": "deleteUser",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:deleteUser"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/deleteUser"
             }
           }
         }

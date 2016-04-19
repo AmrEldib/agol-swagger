@@ -1,7 +1,7 @@
 ### agol-swagger Coverage of ArcGIS REST API 
-Completed items: 41  
+Completed items: 42  
 Total items: 488  
-Completed: 8 %  
+Completed: 9 %  
 
 
 **Managing your organization**  
@@ -17,7 +17,7 @@ Completed: 8 %
 ✔ [Decline Invitation](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Decline_Invitation/02r3000000m8000000/)  
 ✔ [Delete Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Group/02r300000070000000/)  
 ✔ [Delete Notification](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Notification/02r3000000mv000000/)  
-✖ [Delete User](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_User/02r3000000mw000000/)  
+✔ [Delete User](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_User/02r3000000mw000000/)  
 ✖ [Disable](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Disable/02r30000026m000000/)  
 ✖ [Enable](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Enable/02r30000026p000000/)  
 ✔ [Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group/02r30000006m000000/)  
