@@ -1178,6 +1178,93 @@
         }
       }
     },
+    "/sharing/rest/generateToken": {
+      "x-swagger-router-controller": "generateToken",
+      "post": {
+        "summary": "Generate Token",
+        "externalDocs": {
+          "description": "Managing your organization > Generate Token",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Generate_Token/02r3000000m5000000/"
+        },
+        "description": "This operation generates an access token in exchange for user credentials that can be used by clients when working with the ArcGIS Portal API. The call is only allowed over HTTPS and must be a POST. The access token represents the authenticated user for a certain amount of time to all other API functionality. Developers using the API must take care to protect the token against malicious use just as they would the original credentials, and they must be prepared to renew the token. Expired tokens will be rejected by the server. From version 2.1, the generateToken operation also supports generation of a server-token in exchange for a portal token. This server-token is required for clients to access resources from a federated server. The parameters token and serverUrl are required to generate a server-token. See the descriptions of these parameters below for additional information. Organizations that choose to implement higher levels of security for their organizations can set the allSSL setting to true for their organization or portal. The effect of setting allSSL to true is that all non-HTTPS requests for resources belonging to the organization will be rejected. Setting allSSL to true guarantees that all transmissions of access tokens as well as data between clients and servers is over a secure encrypted channel and provides protection to tokens and data in transit. When generateToken is called for a user in such an organization, it returns a response property of ssl=true, and the token must always be passed back via HTTPS to the portal.",
+        "operationId": "generateToken",
+        "security": [ ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "name": "username",
+            "in": "body",
+            "description": "Username of user who wants to get a token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "description": "Password of user who wants to get a token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client",
+            "in": "body",
+            "description": "The client type that will be granted access to the token. Only the referer value is supported. In the Generate Token page, select the Webapp URL option to specify the referer.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [ "referer" ]
+            }
+          },
+          {
+            "name": "referer",
+            "in": "body",
+            "description": "The base URL of the client application that will use the token to access the Portal for ArcGIS API. In the Generate Token page, the referer is specified in the Webapp URL field, for example: referer=http: //myserver/mywebapp",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "expiration",
+            "in": "body",
+            "description": "The token expiration time in minutes. The default is 60 minutes. The maximum expiration period is 15 days. Example: expiration=60 (1 hour). The maximum value of the expiration time is controlled by the server. Requests for tokens larger than this time will be rejected. Applications are responsible for renewing expired tokens; expired tokens will be rejected by the server on subsequent requests that use the token.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "token",
+            "in": "body",
+            "description": "Portal token generated in exchange for user credentials for use by clients working with a federated server. Example: token=<portalToken>. This parameter is required only when generating a server-token. Username, password, client, referrer, and expiration parameters are not required for generating a server-token. The referrer and expiration time of the portal token will be applied to the server-token. ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serverURL",
+            "in": "body",
+            "description": "URL of a federated server for which a server-token needs to be generated. Example: serverUrl=<http://myserver.esri.com/arcgis>. A server-token will be returned only if the serverUrl contains the URL of a server that is registered with the portal. A server-token will not be generated for a server that is not registered with the portal. ",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/generateToken"
+            }
+          }
+        }
+      }
+    },
     "/sharing/rest/community/createGroup": {
       "x-swagger-router-controller": "createGroup",
       "post": {

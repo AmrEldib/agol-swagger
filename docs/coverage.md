@@ -1,11 +1,11 @@
 ### agol-swagger Coverage of ArcGIS REST API 
-Completed items: 44  
+Completed items: 45  
 Total items: 488  
 Completed: 9 %  
 
 
 **Managing your organization**  
-✖ [Generate Token](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Generate_Token/02r3000000m5000000/)  
+✔ [Generate Token](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Generate_Token/02r3000000m5000000/)  
 ✔ [Root](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Root/02r30000009t000000/)  
 ✖ [Search](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Search/02r3000000mp000000/)  
 **Community**  
