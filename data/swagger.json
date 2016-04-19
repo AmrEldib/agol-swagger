@@ -69,7 +69,8 @@
         "post:disableUser": "posts disableUser",
         "post:enableUser": "posts enableUser",
         "read:groupSearch": "reads groupSearch",
-        "post:inviteToGroup": "posts inviteToGroup"
+        "post:inviteToGroup": "posts inviteToGroup",
+        "post:joinGroup": "posts joinGroup"
       }
     }
   },
@@ -460,7 +461,7 @@
     },
     "/sharing/rest/community/groups/{groupId}/invite": {
       "x-swagger-router-controller": "inviteToGroup",
-      "get": {
+      "post": {
         "summary": "Invite to Group",
         "externalDocs": {
           "description": "Managing your organization > Community > Invite to Group",
@@ -765,6 +766,44 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/deleteGroup"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/join": {
+      "x-swagger-router-controller": "joinGroup",
+      "post": {
+        "summary": "Join Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Join Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Join_Group/02r30000006n000000/"
+        },
+        "description": "Users apply to join a group using the Join Group operation (POST only). This creates a new group application, which the group administrators accept or decline. This operation also creates a notification for the user indicating that they have applied to join this group. Available only to authenticated users. Users can only apply to join groups to which they have access. If the group is private, users will not be able to find it to ask to join it. Information pertaining to the applying user, such as their full name and username, can be sent as part of the group application. ",
+        "operationId": "joinGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:joinGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/joinGroup"
             }
           }
         }
