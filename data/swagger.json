@@ -71,7 +71,8 @@
         "read:groupSearch": "reads groupSearch",
         "post:inviteToGroup": "posts inviteToGroup",
         "post:joinGroup": "posts joinGroup",
-        "post:leaveGroup": "posts leaveGroup"
+        "post:leaveGroup": "posts leaveGroup",
+        "post:reassignGroup": "posts reassignGroup"
       }
     }
   },
@@ -843,6 +844,53 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/leaveGroup"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/reassign": {
+      "x-swagger-router-controller": "reassignGroup",
+      "post": {
+        "summary": "Reassign Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Reassign Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Reassign_Group/02r300000067000000/"
+        },
+        "description": "The Reassign Group operation (POST only) allows the administrator of an organization to reassign a group to another member of the organization.",
+        "operationId": "reassignGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:reassignGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "name": "targetUsername",
+            "in": "body",
+            "description": "The target username of the new owner of the group. Example: organization_username1",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/reassignGroup"
             }
           }
         }
