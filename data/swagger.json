@@ -63,7 +63,8 @@
         "post:declineInvitation": "posts declineInvitation",
         "post:deleteComment": "posts deleteComment",
         "post:deleteFolder": "posts deleteFolder",
-        "post:deleteGroup": "posts deleteGroup"
+        "post:deleteGroup": "posts deleteGroup",
+        "post:deleteNotification": "posts deleteNotification"
       }
     }
   },
@@ -162,6 +163,13 @@
       "name": "folderId",
       "in": "path",
       "description": "Id of the folder",
+      "required": true,
+      "type": "string"
+    },
+    "notificationId": {
+      "name": "notificationId",
+      "in": "path",
+      "description": "Id of the notification",
       "required": true,
       "type": "string"
     }
@@ -1012,6 +1020,47 @@
         }
       }
     },
+    "/sharing/rest/community/users/{userName}/notifications/{notificationId}/delete": {
+      "x-swagger-router-controller": "deleteNotification",
+      "post": {
+        "summary": "Delete Notification",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Delete Notification",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Delete_Notification/02r3000000mv000000/"
+        },
+        "description": "The Delete Notification operation (POST only) is available only to the user who receives the notification",
+        "operationId": "deleteNotification",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:deleteNotification"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/notificationId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/deleteNotification"
+            }
+          }
+        }
+      }
+    },
     "/sharing/rest/community/createGroup": {
       "x-swagger-router-controller": "createGroup",
       "post": {
@@ -1330,11 +1379,7 @@
             "$ref": "#/parameters/userName"
           },
           {
-            "name": "notificationId",
-            "in": "path",
-            "description": "Id of the notification",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/notificationId"
           },
           {
             "$ref": "#/parameters/f"
