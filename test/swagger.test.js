@@ -5,6 +5,7 @@ var tv4 = require('tv4');
 
 describe("Swagger schema", function () {
   it("Check if schema is valid", function (done) {
+    this.timeout(5000);
     JSON.parse(fs.readFileSync(path.resolve(__dirname + '/swagger2'), 'utf8'));
     tv4.addSchema(JSON.parse(fs.readFileSync(path.resolve(__dirname + '/swagger2'), 'utf8')));
     var swaggerSchema = tv4.getSchema('http://swagger.io/v2/schema.json#');
