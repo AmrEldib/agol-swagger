@@ -72,7 +72,8 @@
         "post:inviteToGroup": "posts inviteToGroup",
         "post:joinGroup": "posts joinGroup",
         "post:leaveGroup": "posts leaveGroup",
-        "post:reassignGroup": "posts reassignGroup"
+        "post:reassignGroup": "posts reassignGroup",
+        "post:removeUsersFromGroup": "posts removeUsersFromGroup"
       }
     }
   },
@@ -891,6 +892,53 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/reassignGroup"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/removeUsers": {
+      "x-swagger-router-controller": "removeUsersFromGroup",
+      "post": {
+        "summary": "Remove Users from Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Remove Users from Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Remove_Users_From_Group/02r300000066000000/"
+        },
+        "description": "The operation to Remove Users From Group (POST only) is available only to the group administrators, including the owner, and to the administrator of the organization if the user is a member. Both users and admins can be removed using this operation. Group owners cannot be removed from the group.",
+        "operationId": "removeUsersFromGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:removeUsersFromGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "name": "users",
+            "in": "body",
+            "description": "A comma-separated list of usernames (both admins and regular users) to be removed from the group. Example: users=regularusername1,adminusername1,adminusername2,            regularusername2",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/removeUsersFromGroup"
             }
           }
         }
