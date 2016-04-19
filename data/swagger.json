@@ -66,7 +66,8 @@
         "post:deleteGroup": "posts deleteGroup",
         "post:deleteNotification": "posts deleteNotification",
         "post:deleteUser": "posts deleteUser",
-        "post:disableUser": "posts disableUser"
+        "post:disableUser": "posts disableUser",
+        "post:enableUser": "posts enableUser"
       }
     }
   },
@@ -1134,6 +1135,44 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/disableUser"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/users/{userName}/enable": {
+      "x-swagger-router-controller": "enableUser",
+      "post": {
+        "summary": "Enable User",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Enable User",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Enable/02r30000026p000000/"
+        },
+        "description": "The Enable operation (POST only) enables login access for the user. It is only available to the administrator of the organization.",
+        "operationId": "enableUser",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:enableUser"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/enableUser"
             }
           }
         }
