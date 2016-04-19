@@ -65,7 +65,8 @@
         "post:deleteFolder": "posts deleteFolder",
         "post:deleteGroup": "posts deleteGroup",
         "post:deleteNotification": "posts deleteNotification",
-        "post:deleteUser":"posts deleteUser"
+        "post:deleteUser": "posts deleteUser",
+        "post:disableUser": "posts disableUser"
       }
     }
   },
@@ -1095,6 +1096,44 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/deleteUser"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/users/{userName}/disable": {
+      "x-swagger-router-controller": "disableUser",
+      "post": {
+        "summary": "Disable User",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Disable User",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Disable/02r30000026m000000/"
+        },
+        "description": "The Disable operation (POST only) disables login access for the user. It is only available to the administrator of the organization.",
+        "operationId": "disableUser",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:disableUser"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/userName"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/disableUser"
             }
           }
         }
