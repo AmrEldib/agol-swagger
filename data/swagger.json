@@ -74,7 +74,8 @@
         "post:leaveGroup": "posts leaveGroup",
         "post:reassignGroup": "posts reassignGroup",
         "post:removeUsersFromGroup": "posts removeUsersFromGroup",
-        "get:search": "reads search"
+        "read:search": "reads search",
+        "read:searchUsers": "reads searchUsers"
       }
     }
   },
@@ -397,9 +398,6 @@
           }
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/groupId"
-          },
           {
             "$ref": "#/parameters/q"
           },
@@ -1020,6 +1018,56 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/getUser"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/users": {
+      "x-swagger-router-controller": "searchUsers",
+      "get": {
+        "summary": "User Search",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Search Users",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/User_Search/02r3000000m6000000/"
+        },
+        "description": "The User Search operation searches for users in the portal. The search index is updated whenever users are created, updated, or deleted. There can be a lag between the time that the user is updated and the time when it's reflected in the search results. The results only contain users that the calling user has permissions to see. Users can control this visibility by changing the access property of their user. Care should be taken when using ArcGIS REST API search operations (search, user search, group search) to find items, groups, and users programmatically. The Portal uses a powerful search engine to index information and to allow full text searching on it. This search engine uses many different inputs to find the appropriate results and rank them. This often makes search 'fuzzy', making it ideal for human interaction, but not necessarily ideal for looking for specific records programmatically. Developers should avoid using search to find specific items (e.g. by title) as the results of these types of queries might change as the search engine evolves. ",
+        "operationId": "searchUsers",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "read:searchUsers"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/q"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/num"
+          },
+          {
+            "$ref": "#/parameters/sortField"
+          },
+          {
+            "$ref": "#/parameters/sortOrder"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/searchUsers"
             }
           }
         }
@@ -2772,7 +2820,7 @@
         "security": [
           {
             "agol_oauth_implicit": [
-              "get:search"
+              "read:search"
             ]
           }
         ],
