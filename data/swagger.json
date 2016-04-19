@@ -73,7 +73,8 @@
         "post:joinGroup": "posts joinGroup",
         "post:leaveGroup": "posts leaveGroup",
         "post:reassignGroup": "posts reassignGroup",
-        "post:removeUsersFromGroup": "posts removeUsersFromGroup"
+        "post:removeUsersFromGroup": "posts removeUsersFromGroup",
+        "get:search": "reads search"
       }
     }
   },
@@ -131,6 +132,13 @@
       "description": "Describes whether order returns in ascending or descending order. Default is ascending.",
       "in": "query",
       "enum": [ "asc", "desc" ]
+    },
+    "bbox": {
+      "type": "string",
+      "description": "The bounding box for a spatial search defined as minx, miny, maxx, or maxy. Search requires q, bbox, or both. Spatial search is an overlaps/intersects function of the query bbox and the extent of the document. Documents that have no extent (e.g., mxds, 3dds, lyr) will not be found when doing a bbox search. Document extent is assumed to be in the WGS84 geographic coordinate system. Example: bbox=-118,32,-116,34",
+      "name": "bbox",
+      "in": "query",
+      "required": false
     },
     "portalId": {
       "name": "portalId",
@@ -2746,6 +2754,59 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/getUsers"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/search": {
+      "x-swagger-router-controller": "search",
+      "get": {
+        "summary": "Search",
+        "externalDocs": {
+          "description": "Managing your organization > Search",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Root/02r30000009t000000/"
+        },
+        "description": "The Root resource only returns the version of the containing portal. It acts as a root to its child resources and operations. To obtain descriptive information about this portal including its name, logo, featured items, and supported protocols (HTTP vs HTTPS), access the Self resource under Portals.",
+        "operationId": "search",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "get:search"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/q"
+          },
+          {
+            "$ref": "#/parameters/bbox"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/num"
+          },
+          {
+            "$ref": "#/parameters/sortField"
+          },
+          {
+            "$ref": "#/parameters/sortOrder"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/search"
             }
           }
         }
