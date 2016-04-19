@@ -1,5 +1,5 @@
 ### agol-swagger Coverage of ArcGIS REST API 
-Completed items: 45  
+Completed items: 46  
 Total items: 488  
 Completed: 9 %  
 
@@ -23,7 +23,7 @@ Completed: 9 %
 ✔ [Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group/02r30000006m000000/)  
 ✔ [Group Application](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group_Application/02r30000006r000000/)  
 ✔ [Group Applications](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group_Applications/02r300000068000000/)  
-✖ [Group Search](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group_Search/02r3000000m1000000/)  
+✔ [Group Search](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group_Search/02r3000000m1000000/)  
 ✔ [Group Users](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Group_Users/02r30000006p000000/)  
 ✖ [Invite to Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Invite_to_Group/02r30000006v000000/)  
 ✖ [Join Group](http://resources.arcgis.com/en/help/arcgis-rest-api/#/Join_Group/02r30000006n000000/)  
