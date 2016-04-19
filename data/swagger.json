@@ -70,7 +70,8 @@
         "post:enableUser": "posts enableUser",
         "read:groupSearch": "reads groupSearch",
         "post:inviteToGroup": "posts inviteToGroup",
-        "post:joinGroup": "posts joinGroup"
+        "post:joinGroup": "posts joinGroup",
+        "post:leaveGroup": "posts leaveGroup"
       }
     }
   },
@@ -804,6 +805,44 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/joinGroup"
+            }
+          }
+        }
+      }
+    },
+    "/sharing/rest/community/groups/{groupId}/leave": {
+      "x-swagger-router-controller": "leaveGroup",
+      "post": {
+        "summary": "Leave Group",
+        "externalDocs": {
+          "description": "Managing your organization > Community > Leave Group",
+          "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Leave_Group/02r30000006z000000/"
+        },
+        "description": "The Leave Group operation (POST only) is available to all group members other than the group owner. Leaving a group automatically results in the unsharing of all items the user has shared with the group.",
+        "operationId": "leaveGroup",
+        "security": [
+          {
+            "agol_oauth_implicit": [
+              "post:leaveGroup"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/groupId"
+          },
+          {
+            "$ref": "#/parameters/f"
+          },
+          {
+            "$ref": "#/parameters/token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/leaveGroup"
             }
           }
         }
