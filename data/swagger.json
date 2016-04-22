@@ -5,7 +5,7 @@
     "title": "agol-swagger"
   },
   "host": "www.arcgis.com",
-  "basePath": "/sharing/rest",
+  "basePath": "/",
   "schemes": [
     "http",
     "https"
@@ -126,14 +126,21 @@
       "type": "string",
       "description": "Field to sort by. The allowed field names are title, owner, and created.",
       "in": "query",
-      "enum": [ "title", "owner", "created" ]
+      "enum": [
+        "title",
+        "owner",
+        "created"
+      ]
     },
     "sortOrder": {
       "name": "sortOrder",
       "type": "string",
       "description": "Describes whether order returns in ascending or descending order. Default is ascending.",
       "in": "query",
-      "enum": [ "asc", "desc" ]
+      "enum": [
+        "asc",
+        "desc"
+      ]
     },
     "bbox": {
       "type": "string",
@@ -212,110 +219,58 @@
       "required": true,
       "type": "string"
     },
-    "groupTitle": {
-      "name": "title",
+    "groupCommonParameters": {
+      "description": "Common parameters for creating and updating group information",
       "in": "body",
-      "description": "The group title must be unique for the username, and the character limit is 250. Example: title=Redlands Fire Department",
-      "required": false,
+      "name": "groupCommonParameters",
+      "required": true,
       "schema": {
-        "type": "string",
-        "maxLength": 250
+        "$ref": "#/definitions/groupCommonParameters"
       }
     },
-    "groupDescription": {
-      "name": "description",
+    "inviteDetails": {
+      "description": "Details for inviting users to a group",
       "in": "body",
-      "description": "A description of the group that can be any length",
-      "required": false,
+      "name": "inviteDetails",
+      "required": true,
       "schema": {
-        "type": "string"
+        "$ref": "#/definitions/inviteDetails"
       }
     },
-    "groupSnippet": {
-      "name": "snippet",
+    "partDetails": {
+      "description": "Details for adding an item part",
       "in": "body",
-      "description": "Snippet or summary of the group that has a character limit of 250 characters",
-      "required": false,
+      "name": "partDetails",
+      "required": true,
       "schema": {
-        "type": "string",
-        "maxLength": 250
+        "$ref": "#/definitions/partDetails"
       }
     },
-    "groupTags": {
-      "name": "tags",
+    "itemDetails": {
+      "description": "Details for adding an item",
       "in": "body",
-      "description": "Tags are words or short phrases that describe the group. Separate terms with commas. Example: tags=fire, Redlands, California, public safety",
-      "required": false,
+      "name": "itemDetails",
+      "required": true,
       "schema": {
-        "type": "string"
+        "$ref": "#/definitions/itemDetails"
       }
     },
-    "groupPhone": {
-      "name": "phone",
+    "serviceDetails": {
+      "description": "Details for creating a service",
       "in": "body",
-      "description": "Phone is the group contact information. It can be a combination of letters and numbers. The character limit is 250. Example: phone=http://www.ci.redlands.ca.us/fire/index.htm, 35 Cajon Street, Redlands, CA 92373 ",
-      "required": false,
+      "name": "serviceDetails",
+      "required": true,
       "schema": {
-        "type": "string"
+        "$ref": "#/definitions/serviceDetails"
       }
     },
-    "groupAccess": {
-      "name": "access",
+    "tokenDetails": {
+      "description": "Details for generating a token",
       "in": "body",
-      "description": "Sets the access level for the group. private is the default. Setting to org restricts group access to members of your organization. If public, all users can access the group. Values: private | org |public. Example: access=org",
-      "required": false,
+      "name": "tokenDetails",
+      "required": true,
       "schema": {
-        "type": "string",
-        "enum": [ "private", "org", "public" ]
-      }
-    },
-    "groupSortField": {
-      "name": "sortField",
-      "in": "body",
-      "description": "Sets sort field for group items. Values: title | owner | avgrating |numviews| created | modified. Example: sortField=avgrating",
-      "required": false,
-      "schema": {
-        "type": "string",
-        "enum": [ "title", "owner", "avgrating", "numviews", "created", "modified" ]
-      }
-    },
-    "groupSortOrder": {
-      "name": "sortOrder",
-      "in": "body",
-      "description": "Sets sort order for group items. Values: asc | desc. Example: sortOrder=desc",
-      "required": false,
-      "schema": {
-        "type": "string",
-        "enum": [ "asc", "desc" ]
-      }
-    },
-    "groupIsViewOnly": {
-      "name": "isViewOnly",
-      "in": "body",
-      "description": "Allows the group owner or admin to create view-only groups where members are not able to share items. If members try to share, view-only groups are returned in the notshared response property. false is the default. Values: false | true. Example: isViewOnly=true",
-      "required": false,
-      "schema": {
-        "type": "boolean",
-        "default": false
-      }
-    },
-    "groupIsInvitationOnly": {
-      "name": "isInvitationOnly",
-      "in": "body",
-      "description": "If true, this group will not accept join requests. If false, this group does not require an invitation to join. Only group owners and admins can invite users to the group. false is the default. Values: true | false. Example: isInvitationOnly=true",
-      "required": false,
-      "schema": {
-        "type": "boolean",
-        "default": false
-      }
-    },
-    "groupThumbnail": {
-      "name": "thumbnail",
-      "in": "body",
-      "description": "Enter the pathname to the thumbnail image to be used for the group. The recommended image size is 200 pixels wide by 133 pixels high. Acceptable image formats are PNG, GIF, and JPEG. The maximum file size for an image is 1 MB. This is not a reference to the file but the file itself, which will be stored in the Portal. Example: thumbnail=subfolder/thumbnail.jpg",
-      "required": false,
-      "schema": {
-        "type": "string"
+        "$ref": "#/definitions/tokenDetails"
       }
     }
   },
@@ -365,37 +320,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/groupTitle"
-          },
-          {
-            "$ref": "#/parameters/groupDescription"
-          },
-          {
-            "$ref": "#/parameters/groupSnippet"
-          },
-          {
-            "$ref": "#/parameters/groupTags"
-          },
-          {
-            "$ref": "#/parameters/groupPhone"
-          },
-          {
-            "$ref": "#/parameters/groupAccess"
-          },
-          {
-            "$ref": "#/parameters/groupSortField"
-          },
-          {
-            "$ref": "#/parameters/groupSortOrder"
-          },
-          {
-            "$ref": "#/parameters/groupIsViewOnly"
-          },
-          {
-            "$ref": "#/parameters/groupIsInvitationOnly"
-          },
-          {
-            "$ref": "#/parameters/groupThumbnail"
+            "$ref": "#/parameters/groupCommonParameters"
           },
           {
             "$ref": "#/parameters/f"
@@ -524,32 +449,7 @@
             "$ref": "#/parameters/groupId"
           },
           {
-            "name": "users",
-            "description": "A comma separated list of usernames to be invited to the group. If a user is already a member of the group or an invitation has already been sent, the call still returns a success. Example: users=regularusername1,regularusername2",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "role",
-            "description": "Allows administrators to set the user's role in the group. Roles are: group_member: Ability to view and share items with group. group_admin: In addition to viewing and sharing items, the group_admin has the same capabilities as the group owner—invite users to the group, accept or decline group applications, delete content, and remove users.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [ "group_member", "group_admin" ]
-            }
-          },
-          {
-            "name": "expiration",
-            "description": "Expiration date on the invitation can be set for one day, three days, one week, or two weeks, in minutes. Example: expiration=1440",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
+            "$ref": "#/parameters/inviteDetails"
           },
           {
             "$ref": "#/parameters/f"
@@ -1003,46 +903,10 @@
         ],
         "parameters": [
           {
-            "name": "clearEmptyFields",
-            "in": "body",
-            "description": "Tells service to clear any fields that are passed in empty (for example, snippet=&description=)",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
+            "$ref": "#/parameters/groupId"
           },
           {
-            "$ref": "#/parameters/groupTitle"
-          },
-          {
-            "$ref": "#/parameters/groupDescription"
-          },
-          {
-            "$ref": "#/parameters/groupSnippet"
-          },
-          {
-            "$ref": "#/parameters/groupTags"
-          },
-          {
-            "$ref": "#/parameters/groupPhone"
-          },
-          {
-            "$ref": "#/parameters/groupAccess"
-          },
-          {
-            "$ref": "#/parameters/groupSortField"
-          },
-          {
-            "$ref": "#/parameters/groupSortOrder"
-          },
-          {
-            "$ref": "#/parameters/groupIsViewOnly"
-          },
-          {
-            "$ref": "#/parameters/groupIsInvitationOnly"
-          },
-          {
-            "$ref": "#/parameters/groupThumbnail"
+            "$ref": "#/parameters/groupCommonParameters"
           },
           {
             "$ref": "#/parameters/f"
@@ -2047,22 +1911,7 @@
             "$ref": "#/parameters/itemId"
           },
           {
-            "name": "file",
-            "in": "body",
-            "description": "The file to be uploaded",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "partNum",
-            "in": "body",
-            "description": "Part numbers can be any number from 1 to 10,000, inclusive. A part number uniquely identifies a part and also defines its position within the object being created. If you upload a new part using the same part number that was used with a previous part, the previously uploaded part is overwritten. Each part must be at least five (5) megabytes, except the last part. There is no size requirement on the last part of a multipart upload. Example: partNum=1",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/parameters/partDetails"
           },
           {
             "$ref": "#/parameters/f"
@@ -2193,115 +2042,7 @@
             "$ref": "#/parameters/userName"
           },
           {
-            "name": "file",
-            "in": "body",
-            "description": "The file to be uploaded. If uploading a file, the request must be a multipart request",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "dataUrl",
-            "in": "body",
-            "description": "The URL where the item can be downloaded. The resource will be downloaded and stored as a file type. Similar to uploading a file to be added, but instead of transferring the contents of the file, the URL of the data file is referenced and creates a file item. Please see the implementation details section (in the documentation article) which discusses this parameter in further details",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "url",
-            "in": "body",
-            "description": "The URL of the item to be submitted. The URL can be a URL to a service, a web mapping application, or any other content available at that URL. Example: url=http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "text",
-            "in": "body",
-            "description": "The text content for the item to be submitted. Example: text=Any+plain+text+content",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "relationshipType",
-            "in": "body",
-            "description": "The type of relationship between the two items. See Relationship types for a complete listing of types. Example: WMA2Code",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "originItemId",
-            "in": "body",
-            "description": "The item ID of the origin item of the relationship. Example: bb297e5eac6d489e85993d5e4d4e4a20",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "destinationItemId",
-            "in": "body",
-            "description": "The item ID of the destination item of the relationship. Example: 8d292f9b0cd5457bbdad84c02223ffb8",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "async",
-            "in": "body",
-            "description": "If true, the file is uploaded asynchronously. If false, the file is uploaded synchronously. Default is false. Example: async=true",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
-          },
-          {
-            "name": "multipart",
-            "in": "body",
-            "description": "If true, the file is uploaded in multiple parts. See the Multipart Uploads section above for more information",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "filename",
-            "in": "body",
-            "description": "The filename being uploaded in multipart mode. Required if multipart=true",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "serviceProxyParams",
-            "in": "body",
-            "description": "A JSON object that provides rate limiting and referrer checks when accessing secured services. Example: serviceProxyParams: \"hitsPerInterval\":2,\"intervalSeconds\":60,\"referrers\":[\"http://<servername>\"]}",
-            "required": false,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "hitsPerInterval": {
-                  "type": "number"
-                },
-                "intervalSeconds": {
-                  "type": "number"
-                },
-                "referrers": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/parameters/itemDetails"
           },
           {
             "$ref": "#/parameters/f"
@@ -2427,106 +2168,7 @@
             "$ref": "#/parameters/userName"
           },
           {
-            "name": "createParameters",
-            "in": "body",
-            "description": "A JSON object specifying the properties of the newly-created service",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of the service to be created. This name must be unique. If the name already exists, the operation will fail"
-                },
-                "serviceDescription": {
-                  "type": "string",
-                  "description": "Description given to the service"
-                },
-                "hasStaticData": {
-                  "type": "boolean",
-                  "description": "Boolean value indicating whether the data changes"
-                },
-                "maxRecordCount": {
-                  "type": "number",
-                  "description": "A double value indicating any constraints enforced on query operations"
-                },
-                "supportedQueryFormats": {
-                  "type": "string",
-                  "description": "The formats in which query results are returned"
-                },
-                "capabilities": {
-                  "type": "string",
-                  "description": "Specify feature service editing capabilities for Create, Delete, Query, Update, and Sync. The value is a comma-delimited (no spaces) string of some of these values: Create, Delete, Query, Update, Sync"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "A user-friendly description for the published dataset"
-                },
-                "copyrightText": {
-                  "type": "string",
-                  "description": "Copyright information associated with the dataset"
-                },
-                "spatialReference": {
-                  "type": "object",
-                  "properties": {
-                    "wkid": {
-                      "type": "number"
-                    }
-                  },
-                  "description": "All layers added to a hosted feature service need to have the same spatial reference defined for the feature service. When creating a new empty service without specifying its spatial reference, the spatial reference of the hosted feature service is set to the first layer added to that feature service"
-                },
-                "initialExtent": {
-                  "description": "The initial extent set for the service",
-                  "$ref": "#/definitions/getExtent"
-                },
-                "allowGeometryUpdates": {
-                  "type": "boolean",
-                  "description": "Boolean value indicating if updating the geometry of the service is permitted"
-                },
-                "units": {
-                  "type": "string",
-                  "description": "Units used by the feature service"
-                },
-                "xssPreventionInfo": {
-                  "type": "object",
-                  "description": "A JSON object specifying the properties of cross-site scripting prevention",
-                  "properties": {
-                    "xssPreventionEnabled": {
-                      "type": "boolean",
-                      "description": "Boolean value indicating whether cross-site scripting prevention is enabled"
-                    },
-                    "xssPreventionRule": {
-                      "type": "string",
-                      "enum": [
-                        "InputOnly",
-                        "InputOutput"
-                      ]
-                    },
-                    "xssInputRule": {
-                      "type": "string",
-                      "enum": [
-                        "rejectInvalid",
-                        "sanitizeInvalid"
-                      ]
-                    }
-                  }
-                }
-              },
-              "required": [
-                "name"
-              ]
-            }
-          },
-          {
-            "name": "outputType",
-            "in": "body",
-            "description": "The newly-created service type",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "featureService",
-              "enum": [ "featureService" ]
-            }
+            "$ref": "#/parameters/serviceDetails"
           },
           {
             "$ref": "#/parameters/f"
@@ -2602,65 +2244,7 @@
             "$ref": "#/parameters/f"
           },
           {
-            "name": "username",
-            "in": "body",
-            "description": "Username of user who wants to get a token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "description": "Password of user who wants to get a token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "client",
-            "in": "body",
-            "description": "The client type that will be granted access to the token. Only the referer value is supported. In the Generate Token page, select the Webapp URL option to specify the referer.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [ "referer" ]
-            }
-          },
-          {
-            "name": "referer",
-            "in": "body",
-            "description": "The base URL of the client application that will use the token to access the Portal for ArcGIS API. In the Generate Token page, the referer is specified in the Webapp URL field, for example: referer=http: //myserver/mywebapp",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "expiration",
-            "in": "body",
-            "description": "The token expiration time in minutes. The default is 60 minutes. The maximum expiration period is 15 days. Example: expiration=60 (1 hour). The maximum value of the expiration time is controlled by the server. Requests for tokens larger than this time will be rejected. Applications are responsible for renewing expired tokens; expired tokens will be rejected by the server on subsequent requests that use the token.",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "token",
-            "in": "body",
-            "description": "Portal token generated in exchange for user credentials for use by clients working with a federated server. Example: token=<portalToken>. This parameter is required only when generating a server-token. Username, password, client, referrer, and expiration parameters are not required for generating a server-token. The referrer and expiration time of the portal token will be applied to the server-token. ",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "serverURL",
-            "in": "body",
-            "description": "URL of a federated server for which a server-token needs to be generated. Example: serverUrl=<http://myserver.esri.com/arcgis>. A server-token will be returned only if the serverUrl contains the URL of a server that is registered with the portal. A server-token will not be generated for a server that is not registered with the portal. ",
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/parameters/tokenDetails"
           }
         ],
         "responses": {
@@ -5952,6 +5536,356 @@
         "success",
         "username"
       ]
+    },
+    "groupCommonParameters": {
+      "type": "object",
+      "description": "Common parameters for creating and updating group information",
+      "externalDocs": {
+        "description": "Managing your organization > Concepts > Common Parameters",
+        "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Common_parameters/02r30000009v000000/"
+      },
+      "title": "groupCommonParameters",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The group title must be unique for the username, and the character limit is 250. Example: title=Redlands Fire Department",
+          "maxLength": 250
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the group that can be any length"
+        },
+        "snippet": {
+          "type": "string",
+          "description": "Snippet or summary of the group that has a character limit of 250 characters",
+          "maxLength": 250
+        },
+        "tags": {
+          "type": "string",
+          "description": "Tags are words or short phrases that describe the group. Separate terms with commas. Example: tags=fire, Redlands, California, public safety"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone is the group contact information. It can be a combination of letters and numbers. The character limit is 250. Example: phone=http://www.ci.redlands.ca.us/fire/index.htm, 35 Cajon Street, Redlands, CA 92373",
+          "maxLength": 250
+        },
+        "access": {
+          "type": "string",
+          "description": "Sets the access level for the group. private is the default. Setting to org restricts group access to members of your organization. If public, all users can access the group. Values: private | org |public. Example: access=org",
+          "enum": [
+            "private",
+            "org",
+            "public"
+          ]
+        },
+        "sortField": {
+          "type": "string",
+          "description": "Sets sort field for group items. Values: title | owner | avgrating |numviews| created | modified. Example: sortField=avgrating",
+          "enum": [
+            "title",
+            "owner",
+            "avgrating",
+            "numviews",
+            "created",
+            "modified"
+          ]
+        },
+        "sortOrder": {
+          "type": "string",
+          "description": "Sets sort order for group items. Values: asc | desc. Example: sortOrder=desc",
+          "enum": [
+            "asc",
+            "desc"
+          ]
+        },
+        "isViewOnly": {
+          "type": "boolean",
+          "description": "Allows the group owner or admin to create view-only groups where members are not able to share items. If members try to share, view-only groups are returned in the notshared response property. false is the default. Values: false | true. Example: isViewOnly=true",
+          "default": false
+        },
+        "isInvitationOnly": {
+          "type": "boolean",
+          "description": "If true, this group will not accept join requests. If false, this group does not require an invitation to join. Only group owners and admins can invite users to the group. false is the default. Values: true | false. Example: isInvitationOnly=true",
+          "default": false
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "Enter the pathname to the thumbnail image to be used for the group. The recommended image size is 200 pixels wide by 133 pixels high. Acceptable image formats are PNG, GIF, and JPEG. The maximum file size for an image is 1 MB. This is not a reference to the file but the file itself, which will be stored in the Portal. Example: thumbnail=subfolder/thumbnail.jpg"
+        },
+        "clearEmptyFields": {
+          "type": "boolean",
+          "description": "Tells service to clear any fields that are passed in empty (for example, snippet=&description=)"
+        }
+      }
+    },
+    "inviteDetails": {
+      "type": "object",
+      "description": "Details for inviting users to a group",
+      "externalDocs": {
+        "description": "Managing your organization > Community > Invite to Group",
+        "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Invite_to_Group/02r30000006v000000/"
+      },
+      "title": "groupCommonParameters",
+      "properties": {
+        "users": {
+          "type": "string",
+          "description": "A comma separated list of usernames to be invited to the group. If a user is already a member of the group or an invitation has already been sent, the call still returns a success. Example: users=regularusername1,regularusername2"
+        },
+        "role": {
+          "type": "string",
+          "description": "Allows administrators to set the user's role in the group. Roles are: group_member: Ability to view and share items with group. group_admin: In addition to viewing and sharing items, the group_admin has the same capabilities as the group owner�invite users to the group, accept or decline group applications, delete content, and remove users.",
+          "enum": [
+            "group_member",
+            "group_admin"
+          ]
+        },
+        "expiration": {
+          "type": "number",
+          "description": "Expiration date on the invitation can be set for one day, three days, one week, or two weeks, in minutes. Example: expiration=1440"
+        }
+      },
+      "required": [
+        "users",
+        "role",
+        "expiration"
+      ]
+    },
+    "partDetails": {
+      "type": "object",
+      "description": "Details for adding an item part",
+      "externalDocs": {
+        "description": "Managing your organization > Content > Add Item Part",
+        "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item_Part/02r300000094000000/"
+      },
+      "title": "partDetails",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The file to be uploaded"
+        },
+        "partNum": {
+          "type": "string",
+          "description": "Part numbers can be any number from 1 to 10,000, inclusive. A part number uniquely identifies a part and also defines its position within the object being created. If you upload a new part using the same part number that was used with a previous part, the previously uploaded part is overwritten. Each part must be at least five (5) megabytes, except the last part. There is no size requirement on the last part of a multipart upload. Example: partNum=1"
+        }
+      },
+      "required": [
+        "file",
+        "partNum"
+      ]
+    },
+    "itemDetails": {
+      "type": "object",
+      "description": "Details for adding an item",
+      "externalDocs": {
+        "description": "Managing your organization > Content > Add Item",
+        "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Add_Item/02r30000008q000000/"
+      },
+      "title": "itemDetails",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "The file to be uploaded. If uploading a file, the request must be a multipart request"
+        },
+        "dataUrl": {
+          "type": "string",
+          "description": "The URL where the item can be downloaded. The resource will be downloaded and stored as a file type. Similar to uploading a file to be added, but instead of transferring the contents of the file, the URL of the data file is referenced and creates a file item. Please see the implementation details section (in the documentation article) which discusses this parameter in further details"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the item to be submitted. The URL can be a URL to a service, a web mapping application, or any other content available at that URL. Example: url=http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content for the item to be submitted. Example: text=Any+plain+text+content"
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "The type of relationship between the two items. See Relationship types for a complete listing of types. Example: WMA2Code"
+        },
+        "originItemId": {
+          "type": "string",
+          "description": "The item ID of the origin item of the relationship. Example: bb297e5eac6d489e85993d5e4d4e4a20"
+        },
+        "destinationItemId": {
+          "type": "string",
+          "description": "The item ID of the destination item of the relationship. Example: 8d292f9b0cd5457bbdad84c02223ffb8"
+        },
+        "async": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, the file is uploaded asynchronously. If false, the file is uploaded synchronously. Default is false. Example: async=true"
+        },
+        "multipart": {
+          "type": "boolean",
+          "description": "If true, the file is uploaded in multiple parts. See the Multipart Uploads section above for more information"
+        },
+        "filename": {
+          "type": "string",
+          "description": "The filename being uploaded in multipart mode. Required if multipart=true"
+        },
+        "serviceProxyParams": {
+          "type": "object",
+          "description": "A JSON object that provides rate limiting and referrer checks when accessing secured services. Example: serviceProxyParams: \"hitsPerInterval\":2,\"intervalSeconds\":60,\"referrers\":[\"http://<servername>\"]}",
+          "properties": {
+            "hitsPerInterval": {
+              "type": "number"
+            },
+            "intervalSeconds": {
+              "type": "number"
+            },
+            "referrers": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "serviceDetails": {
+      "type": "object",
+      "description": "Details for creating a service",
+      "externalDocs": {
+        "description": "Managing your organization > Content > Create Service",
+        "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/"
+      },
+      "title": "serviceDetails",
+      "properties": {
+        "createParameters": {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the service to be created. This name must be unique. If the name already exists, the operation will fail"
+            },
+            "serviceDescription": {
+              "type": "string",
+              "description": "Description given to the service"
+            },
+            "hasStaticData": {
+              "type": "boolean",
+              "description": "Boolean value indicating whether the data changes"
+            },
+            "maxRecordCount": {
+              "type": "number",
+              "description": "A double value indicating any constraints enforced on query operations"
+            },
+            "supportedQueryFormats": {
+              "type": "string",
+              "description": "The formats in which query results are returned"
+            },
+            "capabilities": {
+              "type": "string",
+              "description": "Specify feature service editing capabilities for Create, Delete, Query, Update, and Sync. The value is a comma-delimited (no spaces) string of some of these values: Create, Delete, Query, Update, Sync"
+            },
+            "description": {
+              "type": "string",
+              "description": "A user-friendly description for the published dataset"
+            },
+            "copyrightText": {
+              "type": "string",
+              "description": "Copyright information associated with the dataset"
+            },
+            "spatialReference": {
+              "type": "object",
+              "properties": {
+                "wkid": {
+                  "type": "number"
+                }
+              },
+              "description": "All layers added to a hosted feature service need to have the same spatial reference defined for the feature service. When creating a new empty service without specifying its spatial reference, the spatial reference of the hosted feature service is set to the first layer added to that feature service"
+            },
+            "initialExtent": {
+              "description": "The initial extent set for the service",
+              "$ref": "#/definitions/getExtent"
+            },
+            "allowGeometryUpdates": {
+              "type": "boolean",
+              "description": "Boolean value indicating if updating the geometry of the service is permitted"
+            },
+            "units": {
+              "type": "string",
+              "description": "Units used by the feature service"
+            },
+            "xssPreventionInfo": {
+              "type": "object",
+              "description": "A JSON object specifying the properties of cross-site scripting prevention",
+              "properties": {
+                "xssPreventionEnabled": {
+                  "type": "boolean",
+                  "description": "Boolean value indicating whether cross-site scripting prevention is enabled"
+                },
+                "xssPreventionRule": {
+                  "type": "string",
+                  "enum": [
+                    "InputOnly",
+                    "InputOutput"
+                  ]
+                },
+                "xssInputRule": {
+                  "type": "string",
+                  "enum": [
+                    "rejectInvalid",
+                    "sanitizeInvalid"
+                  ]
+                }
+              }
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        "outputType": {
+          "type": "string",
+          "description": "The newly-created service type",
+          "default": "featureService",
+          "enum": [
+            "featureService"
+          ]
+        }
+      }
+    },
+    "tokenDetails": {
+      "type": "object",
+      "description": "Details for generating a token",
+      "externalDocs": {
+        "description": "Managing your organization > Content > Create Service",
+        "url": "http://resources.arcgis.com/en/help/arcgis-rest-api/#/Create_Service/02r30000027r000000/"
+      },
+      "title": "tokenDetails",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of user who wants to get a token"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password of user who wants to get a token"
+        },
+        "client": {
+          "type": "string",
+          "description": "The client type that will be granted access to the token. Only the referer value is supported. In the Generate Token page, select the Webapp URL option to specify the referer.",
+          "enum": [
+            "referer"
+          ]
+        },
+        "referer": {
+          "type": "string",
+          "description": "The base URL of the client application that will use the token to access the Portal for ArcGIS API. In the Generate Token page, the referer is specified in the Webapp URL field, for example: referer=http: //myserver/mywebapp"
+        },
+        "expiration": {
+          "type": "number",
+          "description": "The token expiration time in minutes. The default is 60 minutes. The maximum expiration period is 15 days. Example: expiration=60 (1 hour). The maximum value of the expiration time is controlled by the server. Requests for tokens larger than this time will be rejected. Applications are responsible for renewing expired tokens; expired tokens will be rejected by the server on subsequent requests that use the token."
+        },
+        "token": {
+          "type": "string",
+          "description": "Portal token generated in exchange for user credentials for use by clients working with a federated server. Example: token=<portalToken>. This parameter is required only when generating a server-token. Username, password, client, referrer, and expiration parameters are not required for generating a server-token. The referrer and expiration time of the portal token will be applied to the server-token. "
+        },
+        "serverURL": {
+          "type": "string",
+          "description": "URL of a federated server for which a server-token needs to be generated. Example: serverUrl=<http://myserver.esri.com/arcgis>. A server-token will be returned only if the serverUrl contains the URL of a server that is registered with the portal. A server-token will not be generated for a server that is not registered with the portal. "
+        }
+      }
     }
   }
 }
